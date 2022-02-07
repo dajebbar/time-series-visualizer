@@ -10,9 +10,9 @@ df = pd.read_csv('./fcc-forum-pageviews.csv')
 # Clean data
 df.date = pd.to_datetime(df.date)
 df.set_index('date', inplace=True)
-c1 = df.value >= df.value.quantile(0.975)
-c2 = df.value <= df.value.quantile(0.025)
-df = df[~(c1 & c2)]
+c1 = df.value <= df.value.quantile(0.975)
+c2 = df.value >= df.value.quantile(0.025)
+df = df[(c1 & c2)]
 
 
 def draw_line_plot():
